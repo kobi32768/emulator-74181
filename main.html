@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>74181 Emulator</title>
+</head>
+<body>
+
+<h1>74181 Emulator</h1>
+
+<h2>Input</h2>
+<div class="container">
+    <input id="S3" class="input-button opcode" type="checkbox"/> <label for="S3">S3</label>
+    <input id="S2" class="input-button opcode" type="checkbox"/> <label for="S2">S2</label>
+    <input id="S1" class="input-button opcode" type="checkbox"/> <label for="S1">S1</label>
+    <input id="S0" class="input-button opcode" type="checkbox"/> <label for="S0">S0</label>
+    <input id="Cn" class="input-button" type="checkbox"/> <label for="Cn" class="negative">Cn</label>
+    <input id="M"  class="input-button" type="checkbox"/> <label for="M">M</label>
+</div>
+<div class="container">
+    <input id="A3" class="input-button operand" type="checkbox"/> <label for="A3">A3</label>
+    <input id="A2" class="input-button operand" type="checkbox"/> <label for="A2">A2</label>
+    <input id="A1" class="input-button operand" type="checkbox"/> <label for="A1">A1</label>
+    <input id="A0" class="input-button operand" type="checkbox"/> <label for="A0">A0</label>
+</div>
+<div class="container">
+    <input id="B3" class="input-button operand" type="checkbox"/> <label for="B3">B3</label>
+    <input id="B2" class="input-button operand" type="checkbox"/> <label for="B2">B2</label>
+    <input id="B1" class="input-button operand" type="checkbox"/> <label for="B1">B1</label>
+    <input id="B0" class="input-button operand" type="checkbox"/> <label for="B0">B0</label>
+</div>
+
+<h2>Output</h2>
+<div class="container">
+    <input id="F3" type="checkbox" disabled/> <label for="F3">F3</label>
+    <input id="F2" type="checkbox" disabled/> <label for="F2">F2</label>
+    <input id="F1" type="checkbox" disabled/> <label for="F1">F1</label>
+    <input id="F0" type="checkbox" disabled/> <label for="F0">F0</label>
+</div>
+<div class="container">
+    <input id="X" type="checkbox" disabled/> <label for="X">X</label>
+    <input id="Y" type="checkbox" disabled/> <label for="Y">Y</label>
+    <input id="AeqB" type="checkbox" disabled/> <label for="AeqB">A=B</label>
+    <input id="Cnp4" type="checkbox" disabled/> <label for="Cnp4"><span class="negative">Cn</span>+4</label>
+</div>
+
+<h2>Resets</h2>
+<span class="reset" onclick="resetAll()"     >Reset All</span>
+<span class="reset" onclick="resetSCnM()"    >Reset S/Cn/M</span>
+<span class="reset" onclick="resetAB()"      >Reset A/B</span>
+<span class="reset" onclick="resetChar4('S')">Reset S</span>
+<span class="reset" onclick="resetChar4('A')">Reset A</span>
+<span class="reset" onclick="resetChar4('B')">Reset B</span>
+<span class="reset" onclick="resetCnM()"     >Reset Cn/M</span>
+
+<h2>Others</h2>
+<a class="others" href="https://www.ti.com/lit/gpn/sn54s181/">DataSheet</a>
+<a class="others" href="https://kobi32768.github.io/">Author</a>
+
+<script src="index.js"></script>
+</body>
+</html>

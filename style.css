@@ -1,0 +1,50 @@
+html {
+  background: #252728;
+}
+
+body {
+  background: #252728;
+  color: white;
+  user-select: none;
+  font-family: Meiryo, serif;
+  margin-left: 1.34em;
+}
+
+.negative {
+  text-decoration: overline !important;
+}
+
+.reset, .others {
+  text-decoration: none;
+  display: block;
+  margin-bottom: 5px;
+  color: #70cfff;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-left: 30px;
+}
+.reset:hover, .others:hover {
+  text-decoration: underline;
+}
+
+input {
+  display: none;
+}
+input:checked + label {
+  background-color: #62ab57;
+}
+
+label {
+  display: inline-block;
+  font: 21px "JetBrains Mono";
+  width: 50px;
+  text-align: center;
+  margin: 10px 10px;
+  padding: 15px 30px;
+  color: #fff;
+  background: #536774;
+  cursor: pointer;
+  transition: background-color 0.1s;
+}
+
+/*# sourceMappingURL=style.css.map */
