@@ -10,13 +10,13 @@ for (var i = 0; i < inputs.length; i++) {
         onChanged();
     });
 }
-for (var n = 0; n < 4; n++) {
+for (var n = 0; n < 4; n++)
     F[n] = document.getElementById("F" + n);
-}
 X = document.getElementById("X");
 Y = document.getElementById("Y");
 AeqB = document.getElementById("AeqB");
 Cnp4 = document.getElementById("Cnp4");
+// initialize
 onChanged();
 // TODO: A/B に +- 機能を付ける 水色？
 function onChanged() {
@@ -50,7 +50,7 @@ function TY() {
 function TX(n) {
     return XOR(TU(n), TV(n));
 }
-// operators
+// boolean operators
 function AND() {
     var bool = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -81,7 +81,8 @@ function XOR() {
         bool[_i] = arguments[_i];
     }
     // xor: 奇数か判定
-    return bool.filter(function (b) { return b == true; })
+    return bool.filter(
+        function (b) { return b == true; })
         .length % 2 == 1;
 }
 function NAND() {

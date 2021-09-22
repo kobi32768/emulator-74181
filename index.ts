@@ -13,15 +13,15 @@ for (let i = 0; i < inputs.length; i++) {
 }
 
 
-for (let n = 0; n < 4; n++) {
+for (let n = 0; n < 4; n++)
     F[n] = document.getElementById(`F${n}`) as HTMLInputElement
-}
 
 X    = document.getElementById("X")    as HTMLInputElement
 Y    = document.getElementById("Y")    as HTMLInputElement
 AeqB = document.getElementById("AeqB") as HTMLInputElement
 Cnp4 = document.getElementById("Cnp4") as HTMLInputElement
 
+// initialize
 onChanged()
 
 // TODO: A/B に +- 機能を付ける 水色？
@@ -73,14 +73,14 @@ function onChanged() {
 function TU(n): Boolean {
     return NOR(
         A[n],
-        B[n] && S[0],
+        B[n]  && S[0],
         !B[n] && S[1])
 }
 
 function TV(n): Boolean {
     return NOR(
         A[n] && !B[n] && S[2],
-        A[n] && B[n] && S[3]
+        A[n] &&  B[n] && S[3]
     )
 }
 
@@ -97,7 +97,7 @@ function TX(n): Boolean {
     return XOR( TU(n), TV(n) )
 }
 
-// operators
+// boolean operators
 function AND(...bool: Boolean[]): Boolean {
     // and: false が含まれたら false
     for (let i = 0; i < bool.length; i++) {
