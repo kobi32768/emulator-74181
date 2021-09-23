@@ -4,6 +4,7 @@ A = new Array<Number>(4)
 B = new Array<Number>(4)
 F = new Array<HTMLInputElement>(4)
 
+// event listener
 const inputs = document.querySelectorAll(".input-button")
 for (let i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener("click", function() {
@@ -12,7 +13,7 @@ for (let i = 0; i < inputs.length; i++) {
     })
 }
 
-
+// substitution
 for (let n = 0; n < 4; n++)
     F[n] = document.getElementById(`F${n}`) as HTMLInputElement
 
@@ -20,6 +21,14 @@ X    = document.getElementById("X")    as HTMLInputElement
 Y    = document.getElementById("Y")    as HTMLInputElement
 AeqB = document.getElementById("AeqB") as HTMLInputElement
 Cnp4 = document.getElementById("Cnp4") as HTMLInputElement
+
+const activeLowNegatives = [
+    "lA0", "lA1", "lA2", "lA3",
+    "lB0", "lB1", "lB2", "lB3",
+    "lF0", "lF1", "lF2", "lF3",
+    "lX" , "lY" ] // X=P / Y=G
+const activeHighNegatives = [
+    "lCn", "lCnp4" ]
 
 // initialize
 onChanged()
@@ -95,6 +104,27 @@ function TY(): Boolean {
 
 function TX(n): Boolean {
     return XOR( TU(n), TV(n) )
+}
+
+// switch active-(L|H)
+function toActiveLow() {
+    for (const ahn of activeHighNegatives)
+        document.getElementById(ahn).classList.remove("negative")
+    for (const aln of activeLowNegatives)
+        document.getElementById(aln).classList.add("negative")
+
+    document.getElementById("lX").innerText = "P"
+    document.getElementById("lY").innerText = "G"
+}
+
+function toActiveHigh() {
+    for (const aln of activeLowNegatives)
+        document.getElementById(aln).classList.remove("negative")
+    for (const ahn of activeHighNegatives)
+        document.getElementById(ahn).classList.add("negative")
+
+    document.getElementById("lX").innerText = "X"
+    document.getElementById("lY").innerText = "Y"
 }
 
 // boolean operators

@@ -3,6 +3,7 @@ S = new Array(4);
 A = new Array(4);
 B = new Array(4);
 F = new Array(4);
+// event listener
 var inputs = document.querySelectorAll(".input-button");
 for (var i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener("click", function () {
@@ -10,12 +11,22 @@ for (var i = 0; i < inputs.length; i++) {
         onChanged();
     });
 }
+// substitution
 for (var n = 0; n < 4; n++)
     F[n] = document.getElementById("F" + n);
 X = document.getElementById("X");
 Y = document.getElementById("Y");
 AeqB = document.getElementById("AeqB");
 Cnp4 = document.getElementById("Cnp4");
+var activeLowNegatives = [
+    "lA0", "lA1", "lA2", "lA3",
+    "lB0", "lB1", "lB2", "lB3",
+    "lF0", "lF1", "lF2", "lF3",
+    "lX", "lY"
+]; // X=P / Y=G
+var activeHighNegatives = [
+    "lCn", "lCnp4"
+];
 // initialize
 onChanged();
 // TODO: A/B に +- 機能を付ける 水色？
@@ -50,6 +61,31 @@ function TY() {
 function TX(n) {
     return XOR(TU(n), TV(n));
 }
+// switch active-(L|H)
+function toActiveLow() {
+    for (var _i = 0, activeHighNegatives_1 = activeHighNegatives; _i < activeHighNegatives_1.length; _i++) {
+        var ahn = activeHighNegatives_1[_i];
+        document.getElementById(ahn).classList.remove("negative");
+    }
+    for (var _a = 0, activeLowNegatives_1 = activeLowNegatives; _a < activeLowNegatives_1.length; _a++) {
+        var aln = activeLowNegatives_1[_a];
+        document.getElementById(aln).classList.add("negative");
+    }
+    document.getElementById("lX").innerText = "P";
+    document.getElementById("lY").innerText = "G";
+}
+function toActiveHigh() {
+    for (var _i = 0, activeLowNegatives_2 = activeLowNegatives; _i < activeLowNegatives_2.length; _i++) {
+        var aln = activeLowNegatives_2[_i];
+        document.getElementById(aln).classList.remove("negative");
+    }
+    for (var _a = 0, activeHighNegatives_2 = activeHighNegatives; _a < activeHighNegatives_2.length; _a++) {
+        var ahn = activeHighNegatives_2[_a];
+        document.getElementById(ahn).classList.add("negative");
+    }
+    document.getElementById("lX").innerText = "X";
+    document.getElementById("lY").innerText = "Y";
+}
 // boolean operators
 function AND() {
     var bool = [];
@@ -81,8 +117,7 @@ function XOR() {
         bool[_i] = arguments[_i];
     }
     // xor: 奇数か判定
-    return bool.filter(
-        function (b) { return b == true; })
+    return bool.filter(function (b) { return b == true; })
         .length % 2 == 1;
 }
 function NAND() {
