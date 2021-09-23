@@ -8,7 +8,6 @@ var isActiveLow = false;
 var inputs = document.querySelectorAll(".input-button");
 for (var i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener("click", function () {
-        console.log("changed");
         onChanged();
     });
 }
@@ -30,7 +29,6 @@ var activeHighNegatives = [
 ];
 // initialize
 onChanged();
-// TODO: A/B に +- 機能を付ける 水色？
 function onChanged() {
     for (var i = 0; i < 4; i++) {
         S[i] = document.getElementById("S" + i).checked ? 1 : 0;
@@ -48,6 +46,7 @@ function onChanged() {
     Y.checked = !TY();
     AeqB.checked = AND(F[0].checked, F[1].checked, F[2].checked, F[3].checked);
     Cnp4.checked = OR(TY(), AND(TV(0), TV(1), TV(2), TV(3), Cn));
+    console.log("changed");
 }
 // temporaries
 function TU(n) {
@@ -99,6 +98,42 @@ function toActiveHigh() {
     document.getElementById("ActiveLH").innerText
         = document.getElementById("ActiveLH").innerText
             .replace("Low", "High");
+}
+// Plus / Minus 1
+function IncDec(op) {
+    var operand = op.substr(0, 1);
+    var operation = op.substr(1, 1);
+    var num = getNumOperand(operand);
+    // increase / decrease
+    if (operation == '+')
+        num += 1;
+    else
+        num -= 1;
+    // check
+    if (num == 16)
+        num = 0;
+    else if (num == -1)
+        num = 15;
+    deployNumToOperand(operand, num);
+}
+function getNumOperand(operand) {
+    var num = 0;
+    for (var i = 0; i < 4; i++) {
+        if (document.getElementById("" + operand + i).checked) {
+            num += Math.pow(2, i);
+        }
+    }
+    console.log(num);
+    return num;
+}
+function deployNumToOperand(operand, num) {
+    for (var i = 3; i >= 0; i--) {
+        console.log(Math.pow(2, i).toString(2));
+        console.log(((num & Math.pow(2, i)) == 1));
+        document.getElementById("" + operand + i).checked
+            = ((num & Math.pow(2, i)) > 0);
+    }
+    onChanged();
 }
 // boolean operators
 function AND() {

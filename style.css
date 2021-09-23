@@ -53,6 +53,11 @@ input:checked + label {
   background-color: #518c48;
 }
 
+.inc-dec-button {
+  outline: 2px solid #6ebf62;
+  outline-offset: -2px;
+}
+
 label {
   display: inline-block;
   font: 21px "JetBrains Mono";

@@ -1,7 +1,7 @@
 let S, A, B, Cn, M, F, X, Y, AeqB, Cnp4
-S = new Array<Number>(4)
-A = new Array<Number>(4)
-B = new Array<Number>(4)
+S = new Array<number>(4)
+A = new Array<number>(4)
+B = new Array<number>(4)
 F = new Array<HTMLInputElement>(4)
 
 let isActiveLow = false
@@ -10,7 +10,6 @@ let isActiveLow = false
 const inputs = document.querySelectorAll(".input-button")
 for (let i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener("click", function() {
-        console.log("changed")
         onChanged()
     })
 }
@@ -34,8 +33,6 @@ const activeHighNegatives = [
 
 // initialize
 onChanged()
-
-// TODO: A/B に +- 機能を付ける 水色？
 
 function onChanged() {
     for (let i = 0; i < 4; i++) {
@@ -78,24 +75,25 @@ function onChanged() {
     Cnp4.checked = OR(
         TY(),
         AND( TV(0), TV(1), TV(2), TV(3), Cn ))
+    console.log("changed")
 }
 
 // temporaries
-function TU(n): Boolean {
+function TU(n): boolean {
     return NOR(
         A[n],
         B[n]  && S[0],
         !B[n] && S[1])
 }
 
-function TV(n): Boolean {
+function TV(n): boolean {
     return NOR(
         A[n] && !B[n] && S[2],
         A[n] &&  B[n] && S[3]
     )
 }
 
-function TY(): Boolean {
+function TY(): boolean {
     return OR(
         TU(0) && TV(1) && TV(2) && TV(3),
         TU(1) && TV(2) && TV(3),
@@ -104,7 +102,7 @@ function TY(): Boolean {
     )
 }
 
-function TX(n): Boolean {
+function TX(n): boolean {
     return XOR( TU(n), TV(n) )
 }
 
@@ -144,8 +142,50 @@ function toActiveHigh() {
         .replace("Low", "High")
 }
 
+// Plus / Minus 1
+function IncDec(op: string) {
+    const operand   = op.substr(0, 1)
+    const operation = op.substr(1, 1)
+    let num = getNumOperand(operand)
+
+    // increase / decrease
+    if (operation == '+')
+        num += 1
+    else
+        num -= 1
+
+    // check
+    if (num == 16)
+        num = 0
+    else if (num == -1)
+        num = 15
+
+    deployNumToOperand(operand, num)
+}
+
+function getNumOperand(operand: string): number { // A or B
+    let num = 0
+    for (let i = 0; i < 4; i++) {
+        if ((<HTMLInputElement>document.getElementById(`${operand}${i}`)).checked) {
+            num += Math.pow(2, i)
+        }
+    }
+    console.log(num)
+    return num
+}
+
+function deployNumToOperand(operand: string, num: number) {
+    for (let i = 3; i >= 0; i--) {
+        console.log(Math.pow(2, i).toString(2));
+        console.log(( (num & Math.pow(2, i)) == 1 ));
+        (<HTMLInputElement>document.getElementById(`${operand}${i}`)).checked
+        = ( (num & Math.pow(2, i)) > 0 )
+    }
+    onChanged()
+}
+
 // boolean operators
-function AND(...bool: Boolean[]): Boolean {
+function AND(...bool: boolean[]): boolean {
     // and: false が含まれたら false
     for (let i = 0; i < bool.length; i++) {
         if (!bool[i]) return false
@@ -153,7 +193,7 @@ function AND(...bool: Boolean[]): Boolean {
     return true
 }
 
-function OR(...bool: Boolean[]): Boolean {
+function OR(...bool: boolean[]): boolean {
     // or: true が含まれたら true
     for (let i = 0; i < bool.length; i++) {
         if (bool[i]) return true
@@ -161,18 +201,18 @@ function OR(...bool: Boolean[]): Boolean {
     return false
 }
 
-function XOR(...bool: Boolean[]): Boolean {
+function XOR(...bool: boolean[]): boolean {
     // xor: 奇数か判定
     return bool.filter(
         function (b) {return b == true} )
         .length % 2 == 1
 }
 
-function NAND(...bool: Boolean[]): Boolean {
+function NAND(...bool: boolean[]): boolean {
     return !AND(...bool)
 }
 
-function NOR(...bool: Boolean[]): Boolean {
+function NOR(...bool: boolean[]): boolean {
     return !OR(...bool)
 }
 
