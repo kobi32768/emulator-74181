@@ -3,6 +3,7 @@ S = new Array(4);
 A = new Array(4);
 B = new Array(4);
 F = new Array(4);
+var isActiveLow = false;
 // event listener
 var inputs = document.querySelectorAll(".input-button");
 for (var i = 0; i < inputs.length; i++) {
@@ -62,6 +63,13 @@ function TX(n) {
     return XOR(TU(n), TV(n));
 }
 // switch active-(L|H)
+function toggleActiveLH() {
+    if (isActiveLow)
+        toActiveHigh();
+    else
+        toActiveLow();
+    isActiveLow = !isActiveLow;
+}
 function toActiveLow() {
     for (var _i = 0, activeHighNegatives_1 = activeHighNegatives; _i < activeHighNegatives_1.length; _i++) {
         var ahn = activeHighNegatives_1[_i];
@@ -73,6 +81,9 @@ function toActiveLow() {
     }
     document.getElementById("lX").innerText = "P";
     document.getElementById("lY").innerText = "G";
+    document.getElementById("ActiveLH").innerText
+        = document.getElementById("ActiveLH").innerText
+            .replace("High", "Low");
 }
 function toActiveHigh() {
     for (var _i = 0, activeLowNegatives_2 = activeLowNegatives; _i < activeLowNegatives_2.length; _i++) {
@@ -85,6 +96,9 @@ function toActiveHigh() {
     }
     document.getElementById("lX").innerText = "X";
     document.getElementById("lY").innerText = "Y";
+    document.getElementById("ActiveLH").innerText
+        = document.getElementById("ActiveLH").innerText
+            .replace("Low", "High");
 }
 // boolean operators
 function AND() {

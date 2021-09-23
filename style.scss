@@ -1,9 +1,13 @@
-@mixin h2link() {
-    color: #70cfff;
+@mixin h2same() {
     // Same as h2
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-weight: bold;
     margin-left: 30px;
+}
+
+@mixin h2link() {
+    color: #70cfff;
+    @include h2same();
     &:hover {
         text-decoration: underline;
     }
@@ -32,14 +36,25 @@ body {
     @include h2link();
 }
 
+#ActiveLH {
+    @include h2same()
+}
+
+#ALH-SW {
+    @include h2link();
+    position: absolute;
+    left: 290px;
+    margin-left: 0;
+}
+
 input {
     display: none;
     &:checked + label {
-        background-color: #62ab57;
+        background-color: #518c48;
     }
 }
 
-label {
+label{
     display: inline-block;
     font: 21px 'JetBrains Mono';
     width: 50px;

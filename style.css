@@ -19,7 +19,7 @@ body {
   display: block;
   margin-bottom: 5px;
   color: #70cfff;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-left: 30px;
 }
@@ -27,11 +27,30 @@ body {
   text-decoration: underline;
 }
 
+#ActiveLH {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 30px;
+}
+
+#ALH-SW {
+  color: #70cfff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 30px;
+  position: absolute;
+  left: 290px;
+  margin-left: 0;
+}
+#ALH-SW:hover {
+  text-decoration: underline;
+}
+
 input {
   display: none;
 }
 input:checked + label {
-  background-color: #62ab57;
+  background-color: #518c48;
 }
 
 label {

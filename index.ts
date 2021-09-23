@@ -4,6 +4,8 @@ A = new Array<Number>(4)
 B = new Array<Number>(4)
 F = new Array<HTMLInputElement>(4)
 
+let isActiveLow = false
+
 // event listener
 const inputs = document.querySelectorAll(".input-button")
 for (let i = 0; i < inputs.length; i++) {
@@ -107,6 +109,15 @@ function TX(n): Boolean {
 }
 
 // switch active-(L|H)
+function toggleActiveLH() {
+    if (isActiveLow)
+        toActiveHigh()
+    else
+        toActiveLow()
+    isActiveLow = !isActiveLow
+
+}
+
 function toActiveLow() {
     for (const ahn of activeHighNegatives)
         document.getElementById(ahn).classList.remove("negative")
@@ -115,6 +126,9 @@ function toActiveLow() {
 
     document.getElementById("lX").innerText = "P"
     document.getElementById("lY").innerText = "G"
+    document.getElementById("ActiveLH").innerText
+    = document.getElementById("ActiveLH").innerText
+        .replace("High", "Low")
 }
 
 function toActiveHigh() {
@@ -125,6 +139,9 @@ function toActiveHigh() {
 
     document.getElementById("lX").innerText = "X"
     document.getElementById("lY").innerText = "Y"
+    document.getElementById("ActiveLH").innerText
+    = document.getElementById("ActiveLH").innerText
+        .replace("Low", "High")
 }
 
 // boolean operators
