@@ -64,7 +64,7 @@ function onChanged() {
             TU(2) && M,
             TU(1) && TV(2) && M,
             TU(0) && TV(1) && TV(2) && M,
-            TV(0) && TV(1) && TV(2) && M, Cn ))
+            TV(0) && TV(1) && TV(2) && M && Cn ))
     X.checked = NAND( TV(0), TV(1), TV(2), TV(3))
     Y.checked = !TY()
     AeqB.checked = AND(

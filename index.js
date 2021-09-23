@@ -41,7 +41,7 @@ function onChanged() {
     F[0].checked = XOR(TX(0), NAND(M, Cn));
     F[1].checked = XOR(TX(1), NOR(TU(0) && M, TV(0) && M && Cn));
     F[2].checked = XOR(TX(2), NOR(TU(1) && M, TU(0) && TV(1) && M, TV(0) && TV(1) && M && Cn));
-    F[3].checked = XOR(TX(3), NOR(TU(2) && M, TU(1) && TV(2) && M, TU(0) && TV(1) && TV(2) && M, TV(0) && TV(1) && TV(2) && M, Cn));
+    F[3].checked = XOR(TX(3), NOR(TU(2) && M, TU(1) && TV(2) && M, TU(0) && TV(1) && TV(2) && M, TV(0) && TV(1) && TV(2) && M && Cn));
     X.checked = NAND(TV(0), TV(1), TV(2), TV(3));
     Y.checked = !TY();
     AeqB.checked = AND(F[0].checked, F[1].checked, F[2].checked, F[3].checked);
